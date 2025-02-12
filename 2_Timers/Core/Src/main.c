@@ -75,6 +75,15 @@ void delay(uint8_t a_delay) {
 	TIM2->SR &= ~(1U << 0);  // Clear UIF flag
 }
 
+void TIM2_IRQHandler(void) {
+	if (TIM2->SR & (1U << 0))  // Check update interrupt flag
+			{
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+		TIM2->SR &= ~(1U << 0); // Clear interrupt flag
+		// Your code here (e.g., toggle an LED)
+	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -106,7 +115,22 @@ int main(void) {
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	/* USER CODE BEGIN 2 */
-	timerInit();
+//	timerInit();
+	RCC->APB1ENR |= (1U << 0);	//TIM2EN
+
+	TIM2->PSC = 15;	//16 - 1
+
+//	TIM2->CR1 |= (1U << 3);	//OPM
+	TIM2->DIER |= (1U << 0);	//UIE: Update Interrupt Enable
+
+	TIM2->ARR = 999999;  // 1000000 - 1
+
+	TIM2->CNT = 0;
+
+	TIM2->CR1 |= (1U << 0);  // Counter/Timer enable (CEN)
+
+	NVIC_EnableIRQ(TIM2_IRQn);
+	NVIC_SetPriority(TIM2_IRQn, 1);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -115,10 +139,10 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		delay(2);
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		delay(1);
+//		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+//		delay(2);
+//		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+//		delay(1);
 	}
 	/* USER CODE END 3 */
 }

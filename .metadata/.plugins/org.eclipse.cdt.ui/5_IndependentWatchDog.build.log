@@ -1,0 +1,10 @@
+18:46:38 **** Incremental Build of configuration Debug for project 5_IndependentWatchDog ****
+make -j24 all 
+arm-none-eabi-size  5_IndependentWatchDog.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4880	     12	   1580	   6472	   1948	5_IndependentWatchDog.elf
+Finished building: default.size.stdout
+ 
+
+18:46:38 Build Finished. 0 errors, 0 warnings. (took 261ms)
+
