@@ -95,9 +95,14 @@ void timerInit(void) {
 //	GPIOA->AFR[0] |= (1U << 25);
 	GPIOA->AFR[0] |= (2U << 24);
 
-	TIM3->PSC = 15;	//16 000 000 / 16 = 1 000 000
+	// For motor
+//	TIM3->PSC = 15;	//16 000 000 / 16 = 1 000 000
+//
+//	TIM3->ARR = 19999;  // 1 000 000/ 20 000 = 50Hz -> 20ms
 
-	TIM3->ARR = 19999;  // 1 000 000/ 20 000 = 50Hz -> 20ms
+	TIM3->PSC = 15999;	//16 000 000 / 16 000= 1 000
+
+	TIM3->ARR = 999;  // 1 000 000/ 1 000 = 1kHz -> 1ms
 
 	TIM3->CCR1 = 0;	// PWM = CCR1/ARR
 
@@ -156,23 +161,23 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		value = ADCRead();
-
-		setDuty(value / 1.638);
+//		value = ADCRead();
+//
+//		setDuty(value / 1.638);
 //		HAL_Delay(1000);
 //		setDuty(1750);
 //		HAL_Delay(1000);
 //		setDuty(2500);
 //		HAL_Delay(1000);
-//		for (int i = 0; i < 1000; i++) {
-//			TIM3->CCR1 = i;
-//			HAL_Delay(1);
-//		}
-//
-//		for (int i = 1000; i > 0; i--) {
-//			TIM3->CCR1 = i;
-//			HAL_Delay(1);
-//		}
+		for (int i = 0; i < 1000; i++) {
+			TIM3->CCR1 = i;
+			HAL_Delay(1);
+		}
+
+		for (int i = 1000; i > 0; i--) {
+			TIM3->CCR1 = i;
+			HAL_Delay(1);
+		}
 	}
 	/* USER CODE END 3 */
 }

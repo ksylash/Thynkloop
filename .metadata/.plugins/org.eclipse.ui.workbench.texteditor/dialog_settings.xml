@@ -6,8 +6,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="rxData"/>
+		<item key="selection" value="CCR1"/>
 		<list key="findhistory">
+			<item value="CCR1"/>
+			<item value="MX_IWDG_Init"/>
+			<item value="`"/>
+			<item value="main"/>
 			<item value="rxData"/>
 			<item value="UARTTransmit"/>
 			<item value="ST7735_SetAddressWindow "/>

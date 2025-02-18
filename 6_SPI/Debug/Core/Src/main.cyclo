@@ -1,0 +1,6 @@
+../Core/Src/main.c:62:6:initSPI1	1
+../Core/Src/main.c:90:6:transmitSPI	2
+../Core/Src/main.c:100:9:receiveSPI	2
+../Core/Src/main.c:113:5:main	1
+../Core/Src/main.c:160:6:SystemClock_Config	3
+../Core/Src/main.c:202:6:Error_Handler	1
